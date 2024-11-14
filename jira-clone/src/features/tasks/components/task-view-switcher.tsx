@@ -15,7 +15,7 @@ import { columns } from "./columns";
 import { DataTable } from "./data-table";
 
 import { useGetTasks } from "../api/use-get-tasks";
-import { useCreateTaskModal } from "../hooks/use-create-project-modal";
+import { useCreateTaskModal } from "../hooks/use-create-task-modal";
 import { useTaskFilters } from "../hooks/use-task-filters";
 
 export const TaskViewSwitcher = () => {
