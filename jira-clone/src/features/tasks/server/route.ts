@@ -128,7 +128,7 @@ const app = new Hono()
 
           return {
             ...member,
-            name: user.name,
+            name: user.name || user.email,
             email: user.email,
           };
         })
@@ -295,7 +295,7 @@ const app = new Hono()
 
     const assignee = {
       ...member,
-      name: user.name,
+      name: user.name || user.email,
       email: user.email,
     };
 
@@ -308,7 +308,7 @@ const app = new Hono()
     });
   })
   .post(
-    "/:bulk-update",
+    "/bulk-update",
     sessionMiddleware,
     zValidator(
       "json",
@@ -346,6 +346,10 @@ const app = new Hono()
       }
 
       const workspaceId = workspaceIds.values().next().value;
+
+      if (!workspaceId) {
+        return c.json({ error: "Workspace ID is required" }, 400);
+      }
 
       const member = await getMember({
         databases,
